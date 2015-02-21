@@ -17,8 +17,12 @@
 # Author:
 #   stephenyeargin
 
+api_key = process.env.CREATESEND_API_KEY
+client_id = process.env.CREATESEND_CLIENT_ID
+list_id = process.env.CREATESEND_LIST_ID
+
 CampaignMonitor = require('createsend-node');
-auth = apiKey: process.env.CREATESEND_API_KEY
+auth = apiKey: api_key
 
 module.exports = (robot) ->
   robot.respond /(createsend|cm) subscribe (.+@.+)/i, (msg) ->
@@ -28,56 +32,86 @@ module.exports = (robot) ->
   robot.respond /(createsend|cm)$/i, (msg) ->
     latestCampaign msg
 
-subscribeToList = (msg) ->
-  emailAddress = msg.match[1]
-  msg.reply "Attempting to subscribe #{emailAddress}..."
+  ##
+  # Subscribe an email to list
+  subscribeToList = (msg) ->
+    return unless checkCreatesendConfiguration msg
 
-  try
-    api = new CampaignMonitor(auth);
-  catch err
-    console.log err.msg
-    return
+    email_address = msg.match[2]
+    msg.reply "Attempting to subscribe #{email_address}..."
 
-  api.subscribers.addSubscriber process.env.CREATESEND_LIST_ID, emailAddress, (err, data) ->
-    if err
-      msg.send "Uh oh, something went wrong: #{err.msg}"
+    try
+      api = new CampaignMonitor(auth);
+    catch err
+      console.log err
+      return
+
+    api.subscribers.addSubscriber list_id, EmailAddress: email_address, (err, data) ->
+      if err
+        msg.send formatErrorMessage err
+      else
+        msg.send "You successfully subscribed #{email_address}."
+
+  ##
+  # Unsubscribe an email from list
+  unsubscribeFromList = (msg) ->
+    return unless checkCreatesendConfiguration msg
+
+    email_address = msg.match[2]
+    msg.reply "Attempting to unsubscribe #{email_address}..."
+
+    try
+      api = new CampaignMonitor(auth);
+    catch err
+      console.log err
+      return
+
+    api.subscribers.deleteSubscriber list_id, email_address, (err, data) ->
+      if err
+        msg.send formatErrorMessage err
+      else
+        msg.send "You successfully unsubscribed #{email_address}."
+
+  ##
+  # Latest Campaign Statistics
+  latestCampaign = (msg) ->
+    return unless checkCreatesendConfiguration msg
+
+    try
+      api = new CampaignMonitor(auth);
+    catch err
+      console.log err
+      return
+
+    api.clients.getSentCampaigns client_id, (err, data) ->
+      if err
+        msg.send formatErrorMessage err
+      else
+        # Get the first campaign in the list
+        cid = data[0]['CampaignID']
+        campaign_name = data[0]['Name']
+
+        api.campaigns.getSummary cid, (err, data) ->
+          if err
+            msg.send formatErrorMessage err
+          else
+            msg.send "Last campaign \"#{campaign_name}\" was sent to #{data['Recipients']} subscribers (#{data['UniqueOpened']} opened, #{data['Clicks']} clicked, #{data['Unsubscribed']} unsubscribed)"
+
+  ##
+  # Check Createsend Configuration
+  checkCreatesendConfiguration = (msg) ->
+    unless api_key && client_id && list_id
+      msg.send "You are missing one or all of [CREATESEND_API_KEY, CREATESEND_CLIENT_ID, CREATESEND_LIST_ID]"
+      return false
+    true
+
+  ##
+  # Format error message
+  formatErrorMessage = (err) ->
+    robot.logger.debug err
+    if err.Message
+      return "Uh oh, something went wrong: #{err.Message}"
     else
-      msg.send "You successfully subscribed #{emailAddress}."
+      err = err.toString().substring(0, 100)
+      return "Uh oh, something went wrong: #{err}"
 
-unsubscribeFromList = (msg) ->
-  emailAddress = msg.match[1]
-  msg.reply "Attempting to unsubscribe #{emailAddress}..."
-
-  try
-    api = new CampaignMonitor(auth);
-  catch err
-    console.log err.msg
-    return
-
-  api.subscribers.deleteSubscriber process.env.CREATESEND_LIST_ID, emailAddress, (err, data) ->
-    if err
-      msg.send "Uh oh, something went wrong: #{err.msg}"
-    else
-      msg.send "You successfully unsubscribed #{emailAddress}."
-
-latestCampaign = (msg) ->
-
-  try
-    api = new CampaignMonitor(auth);
-  catch err
-    console.log err.msg
-    return
-
-  api.clients.getSentCampaigns { clientId: process.env.CREATESEND_CLIENT_ID }, (err, data) ->
-    if err
-      msg.send "Uh oh, something went wrong: #{err.msg}"
-    else
-      # Get the first campaign in the list
-      cid = data['data'][0]['CampaignID']
-      campaign_name = data['data'][0]['Name']
-
-      api.campaigns.getSummary cid, (err, data) ->
-        if err
-          msg.send "Uh oh, something went wrong: #{err.msg}"
-        else
-          msg.send "Last campaign \"#{campaign_name}\" was sent to #{data['Recipients']} subscribers (#{data['UniqueOpened']} opened, #{data['Clicks']} clicked, #{data['Unsubscribed']} unsubscribed)"
