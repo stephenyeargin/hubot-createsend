@@ -1,0 +1,41 @@
+{
+  "name": "hubot-createsend",
+  "description": "Manage your Campaign Monitor account via Hubot.",
+  "version": "1.0.0",
+  "author": "stephenyeargin",
+  "license": "MIT",
+
+  "keywords": [
+    "hubot",
+    "hubot-scripts",
+    "campaign monitor",
+    "createsend"
+  ],
+
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stephenyeargub/hubot-createsend.git"
+  },
+
+  "bugs": {
+    "url": "https://github.com/stephenyeargin/hubot-createsend/issues"
+  },
+
+  "dependencies": {
+    "coffee-script": "~1.6",
+    "createsend-node": "~0.7"
+  },
+
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "sinon-chai": "*",
+    "sinon": "*"
+  },
+
+  "main": "index.coffee",
+
+  "scripts": {
+    "test": "script/test"
+  }
+}
