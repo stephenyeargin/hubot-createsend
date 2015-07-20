@@ -1,8 +1,8 @@
 # Hubot CreateSend (Campaign Monitor)
 
-Manage your Campaign Monitor account via Hubot
+[![npm version](https://badge.fury.io/js/hubot-createsend.svg)](http://badge.fury.io/js/hubot-createsend) [![Build Status](https://travis-ci.org/stephenyeargin/hubot-createsend.png)](https://travis-ci.org/stephenyeargin/hubot-createsend)
 
-[![Build Status](https://travis-ci.org/stephenyeargin/hubot-createsend.png)](https://travis-ci.org/stephenyeargin/hubot-createsend)
+Manage your Campaign Monitor account via Hubot
 
 ## Getting Started
 
