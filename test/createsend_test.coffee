@@ -4,13 +4,13 @@ chai.use require 'sinon-chai'
 
 expect = chai.expect
 
-describe 'hello-world', ->
+describe 'basic test suite', ->
   beforeEach ->
     @robot =
       respond: sinon.spy()
       hear: sinon.spy()
 
-    require('../src/hubot-createsend')(@robot)
+    require('../src/createsend')(@robot)
 
   it 'registers a createsend subscribe listener', ->
     expect(@robot.respond).to.have.been.calledWith(/(createsend|cm) subscribe (.+@.+)/i)

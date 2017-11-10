@@ -2,7 +2,7 @@
 #   Manage your Campaign Monitor account via Hubot
 #
 # Dependencies:
-#   "createsend-node": "~0.7"
+#   "createsend-node": "~0.8"
 #
 # Configuration:
 #   CREATESEND_API_KEY
@@ -114,4 +114,3 @@ module.exports = (robot) ->
     else
       err = err.toString().substring(0, 100)
       return "Uh oh, something went wrong: #{err}"
-
