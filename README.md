@@ -53,8 +53,8 @@ export CREATESEND_LIST_ID=<List ID>
 Returns the the statistics for the last sent campaign.
 
 ```
-user> hubot createsend
-hubot> Last campaign "April 2015 Newsletter" was sent to 4388 subscribers (902 opened, 306 clicked, 21 unsubscribed)
+alice> @hubot createsend
+hubot> Last campaign "Campaign One" was sent to 1000 subscribers (298 opened, 132 clicked, 43 unsubscribed)
 ```
 
 ### `hubot createsend subscribe <email>`
@@ -62,9 +62,9 @@ hubot> Last campaign "April 2015 Newsletter" was sent to 4388 subscribers (902 o
 Add an email address to the list.
 
 ```
-user> hubot createsend subscribe stephen@example.com
-hubot> Attempting to subscribe stephen@example.com...
-hubot> You successfully subscribed stephen@example.com.
+alice> @hubot createsend subscribe johndoe@example.com
+hubot> @alice Subscribing johndoe@example.com ...
+hubot> Subscribed johndoe@example.com.
 ```
 
 ### `hubot createsend unsubscribe <email>`
@@ -72,7 +72,7 @@ hubot> You successfully subscribed stephen@example.com.
 Remove an email address from the list.
 
 ```
-user> hubot createsend unsubscribe stephen@example.com
-hubot> Attempting to unsubscribe stephen@example.com...
-hubot> You successfully unsubscribed stephen@example.com.
+alice> @hubot createsend unsubscribe johndoe@example.com
+hubot> @alice Unsubscribing johndoe@example.com ...
+hubot> Unsubscribed johndoe@example.com.
 ```
