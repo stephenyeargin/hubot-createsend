@@ -37,7 +37,7 @@ describe 'createsend basic operations', ->
     @room.destroy()
 
   # Test case
-  it 'returns campaign statistics', (done) ->
+  it 'returns campaign statistics', () ->
     selfRoom = @room
     testPromise = new Promise (resolve, reject) ->
       selfRoom.user.say('alice', '@hubot createsend')
@@ -45,19 +45,13 @@ describe 'createsend basic operations', ->
         resolve()
       , 1000)
 
-    testPromise.then ((result) ->
-      try
-        expect(selfRoom.messages).to.eql [
-          ['alice', '@hubot createsend']
-          ['hubot', "Last campaign \"Campaign One\" was sent to 1000 subscribers (298 opened, 132 clicked, 43 unsubscribed)"]
-        ]
-        done()
-      catch err
-        done err
-      return
-    ), done
+    testPromise.then (result) ->
+      expect(selfRoom.messages).to.eql [
+        ['alice', '@hubot createsend']
+        ['hubot', "Last campaign \"Campaign One\" was sent to 1000 subscribers (298 opened, 132 clicked, 43 unsubscribed)"]
+      ]
 
-  it 'subscribes a user', (done) ->
+  it 'subscribes a user', () ->
     selfRoom = @room
     testPromise = new Promise (resolve, reject) ->
       selfRoom.user.say('alice', '@hubot createsend subscribe johndoe@example.com')
@@ -65,20 +59,14 @@ describe 'createsend basic operations', ->
         resolve()
       , 1000)
 
-    testPromise.then ((result) ->
-      try
-        expect(selfRoom.messages).to.eql [
-          ['alice', '@hubot createsend subscribe johndoe@example.com']
-          ['hubot', "@alice Subscribing johndoe@example.com ..."]
-          ['hubot', "Subscribed johndoe@example.com."]
-        ]
-        done()
-      catch err
-        done err
-      return
-    ), done
+    testPromise.then (result) ->
+      expect(selfRoom.messages).to.eql [
+        ['alice', '@hubot createsend subscribe johndoe@example.com']
+        ['hubot', "@alice Subscribing johndoe@example.com ..."]
+        ['hubot', "Subscribed johndoe@example.com."]
+      ]
 
-  it 'unsubscribes a user', (done) ->
+  it 'unsubscribes a user', () ->
     selfRoom = @room
     testPromise = new Promise (resolve, reject) ->
       selfRoom.user.say('alice', '@hubot createsend unsubscribe johndoe@example.com')
@@ -86,15 +74,9 @@ describe 'createsend basic operations', ->
         resolve()
       , 1000)
 
-    testPromise.then ((result) ->
-      try
-        expect(selfRoom.messages).to.eql [
-          ['alice', '@hubot createsend unsubscribe johndoe@example.com']
-          ['hubot', "@alice Unsubscribing johndoe@example.com ..."]
-          ['hubot', "Unsubscribed johndoe@example.com."]
-        ]
-        done()
-      catch err
-        done err
-      return
-    ), done
+    testPromise.then (result) ->
+      expect(selfRoom.messages).to.eql [
+        ['alice', '@hubot createsend unsubscribe johndoe@example.com']
+        ['hubot', "@alice Unsubscribing johndoe@example.com ..."]
+        ['hubot', "Unsubscribed johndoe@example.com."]
+      ]
