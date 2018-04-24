@@ -1,9 +1,6 @@
 # Description:
 #   Manage your Campaign Monitor account via Hubot
 #
-# Dependencies:
-#   "createsend-node": "~0.8"
-#
 # Configuration:
 #   CREATESEND_API_KEY
 #   CREATESEND_CLIENT_ID
