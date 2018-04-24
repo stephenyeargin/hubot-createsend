@@ -24,40 +24,24 @@ Then add **hubot-createsend** to your `external-scripts.json`:
 
 ### Configuration
 
-The script has three environment variables.
-
-- `CREATESEND_API_KEY` - API key of account or particular client (recommended).
-- `CREATESEND_CLIENT_ID` - Unique identifier for desired client
-- `CREATESEND_LIST_ID` - Unique identifier for desired mailing list
-
-### Heroku
-
-```bash
-heroku config:set CREATESEND_API_KEY=<Acount/Client API Key>
-heroku config:set CREATESEND_CLIENT_ID=<Client ID>
-heroku config:set CREATESEND_LIST_ID=<List ID>
-```
-
-### Standard
-
-```
-export CREATESEND_API_KEY=<Acount/Client API Key>
-export CREATESEND_CLIENT_ID=<Client ID>
-export CREATESEND_LIST_ID=<List ID>
-```
+| Environment Variable   | Required? | Description                             |
+| ---------------------- | :-------: | ----------------------------------------|
+| `CREATESEND_API_KEY`   | Yes       | API key of account or particular client |
+| `CREATESEND_CLIENT_ID` | Yes       | Unique identifier for desired client
+| `CREATESEND_LIST_ID`   | Yes       | Unique identifier for desired mailing list |
 
 ## Usage
 
-### `hubot createsend`
+### Get latest campaign
 
-Returns the the statistics for the last sent campaign.
+Returns the the statistics for the last sent campaign. You can use `hubot cm ...` if you prefer to use a few less keystrokes. 
 
 ```
 alice> @hubot createsend
 hubot> Last campaign "Campaign One" was sent to 1000 subscribers (298 opened, 132 clicked, 43 unsubscribed)
 ```
 
-### `hubot createsend subscribe <email>`
+### Subscribe an email
 
 Add an email address to the list.
 
@@ -67,7 +51,7 @@ hubot> @alice Subscribing johndoe@example.com ...
 hubot> Subscribed johndoe@example.com.
 ```
 
-### `hubot createsend unsubscribe <email>`
+### Unsubscribe an email
 
 Remove an email address from the list.
 
