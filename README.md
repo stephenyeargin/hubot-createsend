@@ -1,6 +1,6 @@
 # Hubot CreateSend (Campaign Monitor)
 
-[![npm version](https://badge.fury.io/js/hubot-createsend.svg)](http://badge.fury.io/js/hubot-createsend) [![Build Status](https://app.travis-ci.com/stephenyeargin/hubot-createsend.png)](https://app.travis-ci.com/stephenyeargin/hubot-createsend)
+[![npm version](https://badge.fury.io/js/hubot-createsend.svg)](http://badge.fury.io/js/hubot-createsend) [![Node CI](https://github.com/stephenyeargin/hubot-createsend/actions/workflows/nodejs.yml/badge.svg)](https://github.com/stephenyeargin/hubot-createsend/actions/workflows/nodejs.yml)
 
 Manage your Campaign Monitor account via Hubot
 
