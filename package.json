@@ -1,7 +1,7 @@
 {
   "name": "hubot-createsend",
   "description": "Manage your Campaign Monitor account via Hubot.",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "author": "Stephen Yeargin <stephen@yearg.in>",
   "homepage": "https://github.com/stephenyeargin/hubot-createsend",
   "license": "MIT",
