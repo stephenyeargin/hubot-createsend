@@ -16,11 +16,10 @@
 
 const { CreateSend } = require('@createsend/client');
 
-const apiKey = process.env.CREATESEND_API_KEY;
-const clientId = process.env.CREATESEND_CLIENT_ID;
-const listId = process.env.CREATESEND_LIST_ID;
-
 module.exports = (robot) => {
+  const apiKey = process.env.CREATESEND_API_KEY;
+  const clientId = process.env.CREATESEND_CLIENT_ID;
+  const listId = process.env.CREATESEND_LIST_ID;
   const createSend = CreateSend({ apiKey });
 
   // Subscribe an email address
