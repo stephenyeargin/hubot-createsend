@@ -32,7 +32,7 @@
     "globals": "^17.9.0",
     "hubot": "^14",
     "husky": "^9.1.7",
-    "nock": "^14.0.10"
+    "nock": "^15.0.1"
   },
   "main": "index.js",
   "scripts": {
